@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
 const orderSchema = new mongoose.Schema(
@@ -12,7 +12,13 @@ const orderSchema = new mongoose.Schema(
         productId: {
           type: String,
         },
-        quantity: {
+        productName: {
+          type: String,
+        },
+        price: {
+          type: Number,
+        },
+        quantite: {
           type: Number,
           default: 1,
         },
@@ -21,6 +27,9 @@ const orderSchema = new mongoose.Schema(
     address: {
       type: String,
       required: true,
+    },
+    orderAmount: {
+      type: Number,
     },
     status: {
       type: String,

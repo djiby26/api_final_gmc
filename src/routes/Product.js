@@ -6,6 +6,7 @@ const {
   deleteProduct,
   getOneProduct,
 } = require("../controllers/Products");
+
 const {
   checkTokenAndAuthorization,
   checkTokenAndAdmin,

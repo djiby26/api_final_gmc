@@ -29,7 +29,7 @@ const deleteCart = asyncHandler(async (req, res) => {
 });
 
 const getCart = asyncHandler(async (req, res) => {
-  const cart = await Cart.find(req.params.id);
+  const cart = await Cart.find(req.params.userId);
   return res.send(200).json(cart);
 });
 

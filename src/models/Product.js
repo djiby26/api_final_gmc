@@ -16,9 +16,14 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     category: {
-      type: String,
+      type: mongoose.ObjectId,
+      ref: "Category",
       required: true,
     },
+    // category: {
+    //   type: String,
+    //   required: true,
+    // },
     image: {
       type: String,
       required: true,
@@ -26,6 +31,10 @@ const productSchema = new mongoose.Schema(
     isAvailable: {
       type: Boolean,
       default: true,
+    },
+    isAddedInCart: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }
