@@ -47,6 +47,45 @@ const signup = async (req, res) => {
   }
 };
 
+const createUser = async (req, res) => {
+  const { username, email, password, isAdmin } = req.body;
+
+  if (!username || !email || !password) {
+    res.status(400).json("Please add all fields");
+  }
+
+  // Check if user exists
+  const userExists = await User.findOne({ email });
+
+  if (userExists) {
+    res.status(400).json("User already exists");
+    // throw new Error("User already exists");
+  }
+
+  //generating the hash
+  const hash = await bycrypt.hash(password, 10);
+
+  // Create user
+  const user = await User.create({
+    username,
+    email,
+    password: hash,
+    isAdmin,
+  });
+
+  if (user) {
+    res.status(201).json({
+      userId: user.id,
+      username: user.username,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      // token: generateToken({ id: user._id, isAdmin: user.isAdmin }),
+    });
+  } else {
+    res.status(400).json("Invalid user data");
+  }
+};
+
 const login = async (req, res) => {
   const { username, password } = req.body;
 
@@ -69,4 +108,4 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { signup, login };
+module.exports = { signup, createUser, login };

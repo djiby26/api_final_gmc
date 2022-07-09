@@ -7,7 +7,8 @@ const getProducts = asyncHandler(async (req, res, next) => {
 });
 
 const addProduct = asyncHandler(async (req, res) => {
-  const { title, description, price, image, isAvailable, category } = req.body;
+  const { title, description, price, image, category, stockQuantity } =
+    req.body;
 
   if (!title || !description || !price || !image) {
     res.status(400);
@@ -20,7 +21,8 @@ const addProduct = asyncHandler(async (req, res) => {
     price: price,
     category: category,
     image: image,
-    isAvailable: isAvailable,
+    stockQuantity: stockQuantity,
+    // isAvailable: isAvailable,
   });
 
   res.status(200).json(product);
